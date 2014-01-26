@@ -6,14 +6,14 @@
         <input type="text" class="form-control" placeholder="What is needed to do?" data-ng-model="newTask.content" autofocus required>
         <select class="form-control" name="priority" data-ng-model="newTask.priority" data-ng-options="p.label for p in priorities" ></select>
         <div class="row">
-          <input type="text" class="form-control" datepicker-popup="{{'shortDate'}}" ng-model="newTask.dueDate" min="minDate" max="'2015-06-22'" close-text="Close" />
+          <input type="text" class="form-control" data-datepicker-popup="{{'shortDate'}}" data-ng-model="newTask.dueDate" data-min="minDate" data-max="'2015-06-22'" data-close-text="Close" />
         </div>
         <input type="submit"/>
       </form>
     </div>
     <li data-ng-repeat="task in tasks">
-      <span>{{task.created | date:'short'}}</span>
       <div>{{task.content}}</div>
+      <div>{{task.due_date | date: 'shortDate'}}</div>
       <div>{{task.completed}}</div>
       <div>{{priorities[task.priority].label}}</div>
       <div data-ng-click="complete(task)">Complete</div>

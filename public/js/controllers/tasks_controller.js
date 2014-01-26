@@ -26,11 +26,13 @@ angular.module('mean.tasks').controller('TasksController', ['$scope', '$routePar
     };
 
     $scope.create = function() {
-        var newTask = new Tasks({
-            content: $scope.newTask.content,
-            priority: $scope.newTask.priority.value
+        var newTask = $scope.newTask,
+        task = new Tasks({
+            content: newTask.content,
+            priority: newTask.priority.value,
+            due_date: newTask.dueDate
         });
-        newTask.$save(function (resp) {
+        task.$save(function(resp) {
             //TODO(NE): Check for errors.
             $scope.find();
         });
