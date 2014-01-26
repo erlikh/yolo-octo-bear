@@ -49,6 +49,15 @@ describe('<Unit Test>', function () {
                     done();
                 });
             });
+
+            it('should be incomplete by default', function (done) {
+                return task.save(function (err, task) {
+                    task.completed.should.be.false;
+                    done();
+                });
+            });
+
+
         });
 
         afterEach(function (done) {

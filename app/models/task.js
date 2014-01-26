@@ -18,6 +18,10 @@ var TaskSchema = new Schema({
     updated: {
         type: Date
     },
+    completed: {
+        type: Boolean,
+        default: false
+    },
     content: {
         type: String,
         default: '',
