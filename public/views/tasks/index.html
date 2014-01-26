@@ -3,7 +3,11 @@
   <div>
     <form data-ng-submit="create()">
       <input type="text" class="form-control" placeholder="What is needed to do?" data-ng-model="newTask.content" autofocus required>
-      <select class="form-control" name="priority" data-ng-model="newTask.priority" data-ng-options="p.label for p in priorities"></select>
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary" ng-model="newTask.priority" btn-radio="0">Default</button>
+        <button type="button" class="btn btn-primary" ng-model="newTask.priority" btn-radio="1">Urgent</button>
+        <button type="button" class="btn btn-primary" ng-model="newTask.priority" btn-radio="2">ASAP</button>
+      </div>
       <div class="row">
         <input type="text" class="form-control" data-datepicker-popup="{{'shortDate'}}" data-ng-model="newTask.dueDate" data-min="minDate" data-max="'2015-06-22'" data-close-text="Close" />
       </div>

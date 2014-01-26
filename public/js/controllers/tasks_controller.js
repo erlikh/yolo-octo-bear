@@ -6,15 +6,9 @@ angular.module('mean.tasks').controller('TasksController', ['$scope', '$routePar
     $scope.predicate = 'priority';
     $scope.reverse = true;
 
-    $scope.priorities = [
-        {value: 0, label: 'normal'},
-        {value: 1, label: 'high'},
-        {value: 2, label: 'very high'}
-    ]
-
     var _resetNewTask = function(){
         $scope.newTask = {
-            priority: $scope.priorities[0]
+            priority: 0
         };
     };
 
@@ -30,12 +24,14 @@ angular.module('mean.tasks').controller('TasksController', ['$scope', '$routePar
 
     $scope.create = function() {
         var newTask = $scope.newTask,
+
+        //TODO(NE): Simplify.
         task = new Tasks({
             content: newTask.content,
-            priority: newTask.priority.value,
+            priority: newTask.priority,
             due_date: newTask.dueDate
         });
-        task.$save(function(resp) {
+        task.$save(function() {
             //TODO(NE): Check for errors.
             $scope.find();
         });
