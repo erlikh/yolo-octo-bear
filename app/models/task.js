@@ -16,7 +16,8 @@ var TaskSchema = new Schema({
         default: Date.now
     },
     updated: {
-        type: Date
+        type: Date,
+        default: Date.now
     },
     completed: {
         type: Boolean,
@@ -25,6 +26,9 @@ var TaskSchema = new Schema({
     content: {
         type: String,
         trim: true
+    },
+    priority: {
+        type: Number
     },
     user: {
         type: Schema.ObjectId,
@@ -38,6 +42,10 @@ var TaskSchema = new Schema({
 TaskSchema.path('content').validate(function(content) {
     return content.length;
 }, 'Content cannot be blank');
+
+TaskSchema.path('priority').validate(function(priority) {
+    return [0, 1, 2].indexOf(priority) !== -1;
+}, 'Priority should be in [0, 1, 2]');
 
 /**
  * Statics

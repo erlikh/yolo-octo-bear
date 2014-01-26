@@ -57,7 +57,41 @@ describe('<Unit Test>', function () {
                 });
             });
 
+            it('should show error message if priority > 2', function(done){
+                task.priority = 3;
 
+                return task.save(function (err) {
+                    should.exist(err);
+                    done();
+                });
+            });
+
+            it('should show error message if priority < 0', function(done){
+                task.priority = -1;
+
+                return task.save(function (err) {
+                    should.exist(err);
+                    done();
+                });
+            });
+
+            it('should show error message if no priority given', function(done){
+                task.priority = undefined;
+
+                return task.save(function (err) {
+                    should.exist(err);
+                    done();
+                });
+            });
+
+            it('should not accept non-whole numbers', function(done){
+                task.priority = 1.5;
+
+                return task.save(function (err) {
+                    should.exist(err);
+                    done();
+                });
+            });
         });
 
         afterEach(function (done) {
