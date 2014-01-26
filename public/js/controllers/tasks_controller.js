@@ -3,7 +3,15 @@
 angular.module('mean.tasks').controller('TasksController', ['$scope', '$routeParams', '$location', 'Global', 'Tasks', function ($scope, $routeParams, $location, Global, Tasks) {
     $scope.global = Global;
 
-    $scope.newTask = {};
+    $scope.priorities = [
+        {value: 0, label: 'normal'},
+        {value: 1, label: 'high'},
+        {value: 2, label: 'very high'}
+    ]
+
+    $scope.newTask = {
+        priority: $scope.priorities[0]
+    };
 
     $scope.complete = function(task) {
         task.completed = true;
@@ -16,7 +24,7 @@ angular.module('mean.tasks').controller('TasksController', ['$scope', '$routePar
     $scope.create = function() {
         var newTask = new Tasks({
             content: $scope.newTask.content,
-            completed: false
+            priority: $scope.newTask.priority.value
         });
         newTask.$save(function (resp) {
             //TODO(NE): Check for errors.

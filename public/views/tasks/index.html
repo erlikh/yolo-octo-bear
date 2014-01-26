@@ -4,13 +4,15 @@
     <div>
       <form data-ng-submit="create()">
         <input placeholder="What is needed to do?" data-ng-model="newTask.content" required>
+        <select name="priority" data-ng-model="newTask.priority" data-ng-options="p.label for p in priorities" ></select>
       </form>
 
     </div>
-    <li data-ng-repeat="task in tasks | orderBy:created:true">
-      <span>{{task.created | date:'medium'}}</span>
+    <li data-ng-repeat="task in tasks">
+      <span>{{task.created | date:'short'}}</span>
       <div>{{task.content}}</div>
       <div>{{task.completed}}</div>
+      <div>{{priorities[task.priority].label}}</div>
       <div data-ng-click="complete(task)">Complete</div>
       <div data-ng-click="edit(task)">Edit</div>
       <div data-ng-click="remove(task)">Remove</div>
