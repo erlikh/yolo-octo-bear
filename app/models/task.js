@@ -24,7 +24,6 @@ var TaskSchema = new Schema({
     },
     content: {
         type: String,
-        default: '',
         trim: true
     },
     user: {

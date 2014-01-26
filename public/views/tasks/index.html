@@ -1,4 +1,4 @@
-<h1>Super TODO list</h1>
+<h1>Your tasks</h1>
 <section data-ng-controller="TasksController" data-ng-init="find()">
   <ul class="articles unstyled">
     <div>
@@ -13,7 +13,7 @@
       <div>{{task.completed}}</div>
       <div data-ng-click="complete(task)">Complete</div>
       <div data-ng-click="edit(task)">Edit</div>
+      <div data-ng-click="remove(task)">Remove</div>
     </li>
   </ul>
-  <h1 data-ng-hide="!tasks || tasks.length">No tasks yet. <br> Why don't you <a href="/#!/tasks/create">Create One</a>?</h1>
 </section>

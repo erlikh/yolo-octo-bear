@@ -5,16 +5,15 @@ angular.module('mean.tasks').controller('TasksController', ['$scope', '$routePar
 
     $scope.newTask = {};
 
-    $scope.complete = function (task) {
+    $scope.complete = function(task) {
         task.completed = true;
     };
 
-    $scope.edit = function (task) {
+    $scope.edit = function(task) {
         task.is_editing = true;
     };
 
-    $scope.create = function () {
-        console.log('add')
+    $scope.create = function() {
         var newTask = new Tasks({
             content: $scope.newTask.content,
             completed: false
@@ -27,19 +26,7 @@ angular.module('mean.tasks').controller('TasksController', ['$scope', '$routePar
     };
 
     $scope.remove = function(task) {
-        if (task) {
-            task.$remove();
-
-            for (var i in $scope.tasks) {
-                if ($scope.tasks[i] === task) {
-                    $scope.tasks.splice(i, 1);
-                }
-            }
-        }
-        else {
-            $scope.task.$remove();
-            $location.path('tasks');
-        }
+        task.$remove($scope.find);
     };
 
     $scope.update = function(task) {
