@@ -1,0 +1,10 @@
+<h1>Super TODO list</h1>
+<section data-ng-controller="TasksController" data-ng-init="find()">
+  <ul class="articles unstyled">
+    <li data-ng-repeat="task in tasks">
+      <span>{{todo.created | date:'medium'}}</span> /
+      <div>{{todo.content}}</div>
+    </li>
+  </ul>
+  <h1 data-ng-hide="!tasks || tasks.length">No tasks yet. <br> Why don't you <a href="/#!/tasks/create">Create One</a>?</h1>
+</section>

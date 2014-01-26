@@ -50,7 +50,7 @@ describe('<Unit Test>', function() {
                 });
             });
 
-            it('should be able to show an error when try to save without name', function(done) {
+            xit('should be able to show an error when try to save without name', function(done) {
                 user.name = '';
                 return user.save(function(err) {
                     should.exist(err);

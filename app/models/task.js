@@ -8,9 +8,9 @@ var mongoose = require('mongoose'),
 
 
 /**
- * Todo Schema
+ * Task Schema
  */
-var TodoSchema = new Schema({
+var TaskSchema = new Schema({
     created: {
         type: Date,
         default: Date.now
@@ -32,17 +32,17 @@ var TodoSchema = new Schema({
 /**
  * Validations
  */
-TodoSchema.path('content').validate(function(content) {
+TaskSchema.path('content').validate(function(content) {
     return content.length;
 }, 'Content cannot be blank');
 
 /**
  * Statics
  */
-TodoSchema.statics.load = function(id, cb) {
+TaskSchema.statics.load = function(id, cb) {
     this.findOne({
         _id: id
     }).populate('user', 'name username').exec(cb);
 };
 
-mongoose.model('Todo', TodoSchema);
+mongoose.model('Task', TaskSchema);
