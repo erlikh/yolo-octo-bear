@@ -50,6 +50,33 @@ describe('<Unit Test>', function () {
                 });
             });
 
+            it('should be able to show an error when try to save incorrect date', function (done) {
+                task.due_date = 'sometime';
+
+                return task.save(function (err, task) {
+                    should.exist(err);
+                    done();
+                });
+            });
+
+            it('should be able to save with correct given due date', function (done) {
+                task.due_date = new Date();
+
+                return task.save(function (err, task) {
+                    should.not.exist(err);
+                    done();
+                });
+            });
+
+            it('should be able to save without due date', function (done) {
+                task.due_date = undefined;
+
+                return task.save(function (err, task) {
+                    should.not.exist(err);
+                    done();
+                });
+            });
+
             it('should be incomplete by default', function (done) {
                 return task.save(function (err, task) {
                     task.completed.should.be.false;

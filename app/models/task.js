@@ -19,6 +19,9 @@ var TaskSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    due_date: {
+        type: Date
+    },
     completed: {
         type: Boolean,
         default: false
