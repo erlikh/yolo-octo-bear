@@ -1,9 +1,18 @@
 <h1>Super TODO list</h1>
 <section data-ng-controller="TasksController" data-ng-init="find()">
   <ul class="articles unstyled">
-    <li data-ng-repeat="task in tasks">
+    <div>
+      <form data-ng-submit="create()">
+        <input placeholder="What is needed to do?" data-ng-model="newTask.content" required>
+      </form>
+
+    </div>
+    <li data-ng-repeat="task in tasks | orderBy:created:true">
       <span>{{task.created | date:'medium'}}</span>
       <div>{{task.content}}</div>
+      <div>{{task.completed}}</div>
+      <div data-ng-click="complete(task)">Complete</div>
+      <div data-ng-click="edit(task)">Edit</div>
     </li>
   </ul>
   <h1 data-ng-hide="!tasks || tasks.length">No tasks yet. <br> Why don't you <a href="/#!/tasks/create">Create One</a>?</h1>

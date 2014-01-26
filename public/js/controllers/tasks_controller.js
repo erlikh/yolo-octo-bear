@@ -3,17 +3,27 @@
 angular.module('mean.tasks').controller('TasksController', ['$scope', '$routeParams', '$location', 'Global', 'Tasks', function ($scope, $routeParams, $location, Global, Tasks) {
     $scope.global = Global;
 
-    $scope.create = function() {
-        var task = new Tasks({
-            title: this.title,
-            content: this.content
-        });
-        task.$save(function(response) {
-            $location.path('articles/' + response._id);
-        });
+    $scope.newTask = {};
 
-        this.title = '';
-        this.content = '';
+    $scope.complete = function (task) {
+        task.completed = true;
+    };
+
+    $scope.edit = function (task) {
+        task.is_editing = true;
+    };
+
+    $scope.create = function () {
+        console.log('add')
+        var newTask = new Tasks({
+            content: $scope.newTask.content,
+            completed: false
+        });
+        newTask.$save(function (resp) {
+            //TODO(NE): Check for errors.
+            $scope.find();
+        });
+        $scope.newTask = {};
     };
 
     $scope.remove = function(task) {
@@ -32,8 +42,7 @@ angular.module('mean.tasks').controller('TasksController', ['$scope', '$routePar
         }
     };
 
-    $scope.update = function() {
-        var task = $scope.task;
+    $scope.update = function(task) {
         if (!task.updated) {
             task.updated = [];
         }
