@@ -1,17 +1,22 @@
 <h1>Your tasks</h1>
 <section data-ng-controller="TasksController" data-ng-init="find()">
-  <div>
+  <div class="container">
     <form data-ng-submit="create()">
-      <input type="text" class="form-control" placeholder="What is needed to do?" data-ng-model="newTask.content" autofocus required>
+      <div class="col-xs-6">
+        <input type="text" class="form-control" placeholder="What is needed to do?" data-ng-model="newTask.content" autofocus required>
+      </div>
+
+      <div class="col-xs-2">
+        <input type="text" class="form-control" placeholder="Due date" data-datepicker-popup="{{'shortDate'}}" data-ng-model="newTask.dueDate" data-min="minDate" data-max="'2015-06-22'" data-close-text="Close" />
+      </div>
+
       <div class="btn-group">
         <button type="button" class="btn btn-primary" ng-model="newTask.priority" btn-radio="0">Default</button>
         <button type="button" class="btn btn-primary" ng-model="newTask.priority" btn-radio="1">Urgent</button>
         <button type="button" class="btn btn-primary" ng-model="newTask.priority" btn-radio="2">ASAP</button>
       </div>
-      <div class="row">
-        <input type="text" class="form-control" data-datepicker-popup="{{'shortDate'}}" data-ng-model="newTask.dueDate" data-min="minDate" data-max="'2015-06-22'" data-close-text="Close" />
-      </div>
-      <input type="submit"/>
+
+      <button type="submit" class="btn btn-link">Save</button>
     </form>
   </div>
 
