@@ -14,7 +14,7 @@ var todo;
 
 //The tests
 describe('<Unit Test>', function () {
-    describe('Model Article:', function () {
+    describe('Model Todo:', function () {
         beforeEach(function (done) {
             user = new User({
                 name: 'Full name',
