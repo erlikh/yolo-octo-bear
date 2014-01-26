@@ -3,10 +3,13 @@
   <ul class="articles unstyled">
     <div>
       <form data-ng-submit="create()">
-        <input placeholder="What is needed to do?" data-ng-model="newTask.content" required>
-        <select name="priority" data-ng-model="newTask.priority" data-ng-options="p.label for p in priorities" ></select>
+        <input type="text" class="form-control" placeholder="What is needed to do?" data-ng-model="newTask.content" autofocus required>
+        <select class="form-control" name="priority" data-ng-model="newTask.priority" data-ng-options="p.label for p in priorities" ></select>
+        <div class="row">
+          <input type="text" class="form-control" datepicker-popup="{{'shortDate'}}" ng-model="newTask.dueDate" min="minDate" max="'2015-06-22'" close-text="Close" />
+        </div>
+        <input type="submit"/>
       </form>
-
     </div>
     <li data-ng-repeat="task in tasks">
       <span>{{task.created | date:'short'}}</span>

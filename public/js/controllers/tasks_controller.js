@@ -9,9 +9,13 @@ angular.module('mean.tasks').controller('TasksController', ['$scope', '$routePar
         {value: 2, label: 'very high'}
     ]
 
-    $scope.newTask = {
-        priority: $scope.priorities[0]
+    var _resetNewTask = function(){
+        $scope.newTask = {
+            priority: $scope.priorities[0]
+        };
     };
+
+    _resetNewTask();
 
     $scope.complete = function(task) {
         task.completed = true;
@@ -30,7 +34,7 @@ angular.module('mean.tasks').controller('TasksController', ['$scope', '$routePar
             //TODO(NE): Check for errors.
             $scope.find();
         });
-        $scope.newTask = {};
+        _resetNewTask();
     };
 
     $scope.remove = function(task) {
