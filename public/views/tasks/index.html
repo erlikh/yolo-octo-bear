@@ -1,23 +1,39 @@
 <h1>Your tasks</h1>
 <section data-ng-controller="TasksController" data-ng-init="find()">
+  <div>
+    <form data-ng-submit="create()">
+      <input type="text" class="form-control" placeholder="What is needed to do?" data-ng-model="newTask.content" autofocus required>
+      <select class="form-control" name="priority" data-ng-model="newTask.priority" data-ng-options="p.label for p in priorities"></select>
+      <div class="row">
+        <input type="text" class="form-control" data-datepicker-popup="{{'shortDate'}}" data-ng-model="newTask.dueDate" data-min="minDate" data-max="'2015-06-22'" data-close-text="Close" />
+      </div>
+      <input type="submit"/>
+    </form>
+  </div>
+
+  <table class="friend">
+    <tr>
+      <th><a href="" ng-click="predicate = 'priority'; reverse=!reverse">Priority</a>
+      <th><a href="" ng-click="predicate = 'due_date'; reverse=!reverse">Due date</a></th>
+    </tr>
+  </table>
   <ul class="articles unstyled">
-    <div>
-      <form data-ng-submit="create()">
-        <input type="text" class="form-control" placeholder="What is needed to do?" data-ng-model="newTask.content" autofocus required>
-        <select class="form-control" name="priority" data-ng-model="newTask.priority" data-ng-options="p.label for p in priorities" ></select>
-        <div class="row">
-          <input type="text" class="form-control" data-datepicker-popup="{{'shortDate'}}" data-ng-model="newTask.dueDate" data-min="minDate" data-max="'2015-06-22'" data-close-text="Close" />
-        </div>
-        <input type="submit"/>
-      </form>
-    </div>
-    <li data-ng-repeat="task in tasks">
+    <li data-ng-repeat="task in tasks | filter: {completed: false} | orderBy:predicate:reverse">
       <div>{{task.content}}</div>
+      <div>{{task.is_completed}}</div>
       <div>{{task.due_date | date: 'shortDate'}}</div>
-      <div>{{task.completed}}</div>
       <div>{{priorities[task.priority].label}}</div>
       <div data-ng-click="complete(task)">Complete</div>
       <div data-ng-click="edit(task)">Edit</div>
+      <div data-ng-click="remove(task)">Remove</div>
+    </li>
+  </ul>
+
+  <h4>Completed</h4>
+  <ul class="articles unstyled">
+    <li data-ng-repeat="task in tasks | filter: {completed: true}">
+      <div>{{task.content}}</div>
+      <div data-ng-click="complete(task)">Restart</div>
       <div data-ng-click="remove(task)">Remove</div>
     </li>
   </ul>

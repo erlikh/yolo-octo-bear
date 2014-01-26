@@ -3,6 +3,9 @@
 angular.module('mean.tasks').controller('TasksController', ['$scope', '$routeParams', '$location', 'Global', 'Tasks', function ($scope, $routeParams, $location, Global, Tasks) {
     $scope.global = Global;
 
+    $scope.predicate = 'priority';
+    $scope.reverse = true;
+
     $scope.priorities = [
         {value: 0, label: 'normal'},
         {value: 1, label: 'high'},
@@ -18,7 +21,7 @@ angular.module('mean.tasks').controller('TasksController', ['$scope', '$routePar
     _resetNewTask();
 
     $scope.complete = function(task) {
-        task.completed = true;
+        task.completed = !task.completed;
     };
 
     $scope.edit = function(task) {
