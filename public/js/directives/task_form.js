@@ -8,11 +8,11 @@ angular.module('mean.tasks').directive('taskForm', [function() {
         },
         template:
             '<form data-ng-submit="submit(task)"> \
-                <div class="col-xs-6"> \
+                <div class="col-xs-4"> \
                     <input type="text" class="form-control" placeholder="What is needed to do?" data-ng-model="task.content" autofocus required> \
                 </div> \
                 <div class="col-xs-2"> \
-                    <input type="text" class="form-control" placeholder="Due date" data-datepicker-popup="{{\'shortDate\'}}" data-ng-model="task.dueDate" data-min="minDate" data-max="\'2015-06-22\'" data-close-text="Close" /> \
+                    <input type="text" class="form-control" placeholder="Due date" data-datepicker-popup="{{\'shortDate\'}}" data-ng-model="task.due_date" data-min="minDate" data-max="\'2015-06-22\'" data-close-text="Close"/> \
                 </div> \
                 <div class="btn-group"> \
                     <button type="button" class="btn btn-primary" ng-model="task.priority" btn-radio="0">Default</button> \

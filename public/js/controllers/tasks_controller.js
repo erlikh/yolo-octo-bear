@@ -28,15 +28,8 @@ angular.module('mean.tasks').controller('TasksController', ['$scope', '$routePar
     };
 
     $scope.create = function(task) {
-
-        //TODO(NE): Simplify.
-        task = new Tasks({
-            content: task.content,
-            priority: task.priority,
-            due_date: task.dueDate
-        });
+        task = new Tasks(task);
         task.$save(function() {
-            //TODO(NE): Check for errors.
             $scope.find();
         });
         _resetNewTask();
