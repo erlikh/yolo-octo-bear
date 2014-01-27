@@ -38,9 +38,7 @@ angular.module('mean.tasks').controller('TasksController', ['$scope', '$routePar
     $scope.update = function(task) {
         task.updated = new Date().getTime();
 
-        task.$update(function() {
-            $location.path('tasks/' + task._id);
-        });
+        task.$update($scope.find());
     };
 
     $scope.find = function() {

@@ -31,7 +31,7 @@
             {{task.content}}
           </td>
           <td data-ng-hide="isEditing(task)">{{task.due_date | date: 'shortDate'}}</td>
-          <td data-ng-hide="isEditing(task)">{{task.priority}}</td>
+          <td data-ng-hide="isEditing(task)">{{task.priority | priority}}</td>
           <td data-ng-hide="isEditing(task)">
             <span data-ng-click="complete(task)">Complete</span>
             <span data-ng-click="edit(task)">Edit</span>
