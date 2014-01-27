@@ -28,10 +28,12 @@ var TaskSchema = new Schema({
     },
     content: {
         type: String,
+        default: '',
         trim: true
     },
     priority: {
-        type: Number
+        type: Number,
+        default: 0
     },
     user: {
         type: Schema.ObjectId,
@@ -43,7 +45,7 @@ var TaskSchema = new Schema({
  * Validations
  */
 TaskSchema.path('content').validate(function(content) {
-    return content.length;
+    return !!content.trim().length;
 }, 'Content cannot be blank');
 
 TaskSchema.path('priority').validate(function(priority) {
