@@ -1,25 +1,33 @@
-<h1>Your tasks</h1>
+<section data-ng-controller="TasksController" data-ng-init="global.authenticated && find()">
 
-<section data-ng-controller="TasksController" data-ng-init="find()">
-  <div task-form task="newTask" on-submit="create(task)" on-cancel="cancelEdit()"></div>
+  <section data-ng-hide="global.authenticated">
+    <h1>Please</h1>
+    <a class="btn btn-primary btn-lg btn-block" href="signin">Signin</a>
+    <h2>or</h2>
+    <a class="btn btn-default btn-lg btn-block" href="signup">Signup</a>
+  </section>
 
-  <div class="container">
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Task</th>
-        <th><a href="" data-ng-click="predicate = 'due_date'; reverse=!reverse">Due date</a></th>
-        <th><a href="" data-ng-click="predicate = 'priority'; reverse=!reverse">Priority</a></th>
-        <th>#</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr data-ng-repeat="task in tasks | filter: {completed: false} | orderBy:predicate:reverse">
-        <section data-ng-show="editingTask == task">
-          <td colspan="4" data-ng-show="editingTask == task">
-            <div task-form task="task" on-submit="update(task)" on-cancel="cancelEdit()"></div>
-          </td>
-        </section>
+  <section data-ng-show="global.authenticated">
+    <h1>Your tasks</h1>
+    <div task-form task="newTask" on-submit="create(task)" on-cancel="cancelEdit()"></div>
+
+    <div class="container">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Task</th>
+          <th><a href="" data-ng-click="predicate = 'due_date'; reverse=!reverse">Due date</a></th>
+          <th><a href="" data-ng-click="predicate = 'priority'; reverse=!reverse">Priority</a></th>
+          <th>#</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="task in tasks | filter: {completed: false} | orderBy:predicate:reverse">
+          <section data-ng-show="editingTask == task">
+            <td colspan="4" data-ng-show="editingTask == task">
+              <div task-form task="task" on-submit="update(task)" on-cancel="cancelEdit()"></div>
+            </td>
+          </section>
 
           <td data-ng-hide="editingTask == task">
             {{task.content}}
@@ -31,18 +39,20 @@
             <span data-ng-click="edit(task)">Edit</span>
             <span data-ng-click="remove(task)">Remove</span>
           </td>
-      </tr>
-      </tbody>
+        </tr>
+        </tbody>
 
-    </table>
+      </table>
 
-    <h4>Completed</h4>
-    <ul>
-      <li data-ng-repeat="task in tasks | filter: {completed: true}">
-        <div>{{task.content}}</div>
-        <div data-ng-click="complete(task)">Restart</div>
-        <div data-ng-click="remove(task)">Remove</div>
-      </li>
-    </ul>
-  </div>
+      <h4>Completed</h4>
+      <ul>
+        <li data-ng-repeat="task in tasks | filter: {completed: true}">
+          <div>{{task.content}}</div>
+          <div data-ng-click="complete(task)">Restart</div>
+          <div data-ng-click="remove(task)">Remove</div>
+        </li>
+      </ul>
+    </div>
+
+  </section>
 </section>
