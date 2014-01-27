@@ -17,7 +17,7 @@ var express = require('express'),
 // Set the node enviornment variable if not set before
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-// Initializing system variables 
+// Initializing system variables
 var config = require('./config/config'),
     mongoose = require('mongoose');
 
@@ -60,7 +60,7 @@ var walk = function(path) {
                 require(newPath)(app, passport);
             }
         // We skip the app/routes/middlewares directory as it is meant to be
-        // used and shared by routes as further middlewares and is not a 
+        // used and shared by routes as further middlewares and is not a
         // route by itself
         } else if (stat.isDirectory() && file !== 'middlewares') {
             walk(newPath);
@@ -79,4 +79,4 @@ console.log('Express app started on port ' + port);
 logger.init(app, passport, mongoose);
 
 // Expose app
-exports = module.exports = app;
+var exports = module.exports = app;

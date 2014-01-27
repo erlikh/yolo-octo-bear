@@ -27,6 +27,11 @@ angular.module('mean.tasks').directive('taskForm', [function() {
 
             $scope.submit = function() {
                 $scope.onSubmit({ task: $scope.task });
+
+                //NOTE(NE): Case of new task.
+                if(!$scope.task._id) {
+                    $scope.task = $scope.sourceTask;
+                }
             };
 
             $scope.cancel = function() {

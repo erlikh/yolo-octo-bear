@@ -23,18 +23,16 @@
         </thead>
         <tbody>
         <tr data-ng-repeat="task in tasks | filter: {completed: false} | orderBy:predicate:reverse">
-          <section data-ng-show="editingTask == task">
-            <td colspan="4" data-ng-show="editingTask == task">
-              <div task-form task="task" on-submit="update(task)" on-cancel="cancelEdit()"></div>
-            </td>
-          </section>
+          <td colspan="4" data-ng-show="isEditing(task)">
+            <div task-form task="task" on-submit="update(task)" on-cancel="cancelEdit()"></div>
+          </td>
 
-          <td data-ng-hide="editingTask == task">
+          <td data-ng-hide="isEditing(task)">
             {{task.content}}
           </td>
-          <td data-ng-hide="editingTask == task">{{task.due_date | date: 'shortDate'}}</td>
-          <td data-ng-hide="editingTask == task">{{task.priority}}</td>
-          <td data-ng-hide="editingTask == task">
+          <td data-ng-hide="isEditing(task)">{{task.due_date | date: 'shortDate'}}</td>
+          <td data-ng-hide="isEditing(task)">{{task.priority}}</td>
+          <td data-ng-hide="isEditing(task)">
             <span data-ng-click="complete(task)">Complete</span>
             <span data-ng-click="edit(task)">Edit</span>
             <span data-ng-click="remove(task)">Remove</span>

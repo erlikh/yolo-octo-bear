@@ -5,14 +5,11 @@ angular.module('mean.tasks').controller('TasksController', ['$scope', '$routePar
 
     $scope.predicate = 'priority';
     $scope.reverse = true;
+    $scope.newTask = { priority: 0 };
 
-    var _resetNewTask = function(){
-        $scope.newTask = {
-            priority: 0
-        };
+    $scope.isEditing = function(task) {
+      return task == $scope.editingTask;
     };
-
-    _resetNewTask();
 
     $scope.complete = function(task) {
         task.completed = !task.completed;
@@ -32,7 +29,6 @@ angular.module('mean.tasks').controller('TasksController', ['$scope', '$routePar
         task.$save(function() {
             $scope.find();
         });
-        _resetNewTask();
     };
 
     $scope.remove = function(task) {
