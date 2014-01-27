@@ -59,14 +59,6 @@ angular.module('mean.tasks').controller('TasksController', ['$scope', '$routePar
             $scope.tasks = tasks;
         });
     };
-
-    $scope.findOne = function() {
-        Tasks.get({
-            taskId: $routeParams.taskId
-        }, function(task) {
-            $scope.task = task;
-        });
-    };
 }]);
 
 
