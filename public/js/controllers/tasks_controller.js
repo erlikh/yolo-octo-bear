@@ -8,7 +8,7 @@ angular.module('mean.tasks').controller('TasksController', ['$scope', '$routePar
     $scope.newTask = { priority: 0 };
 
     $scope.isEditing = function(task) {
-      return task == $scope.editingTask;
+        return task === $scope.editingTask;
     };
 
     $scope.complete = function(task) {
