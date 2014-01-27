@@ -33,9 +33,9 @@
           <td data-ng-hide="isEditing(task)">{{task.due_date | date: 'shortDate'}}</td>
           <td data-ng-hide="isEditing(task)">{{task.priority | priority}}</td>
           <td data-ng-hide="isEditing(task)">
-            <span data-ng-click="complete(task)">Complete</span>
-            <span data-ng-click="edit(task)">Edit</span>
-            <span data-ng-click="remove(task)">Remove</span>
+            <a data-ng-click="complete(task)">Complete</a>
+            <a data-ng-click="edit(task)">Edit</a>
+            <a data-ng-click="remove(task)">Remove</a>
           </td>
         </tr>
         </tbody>
@@ -46,8 +46,8 @@
       <ul>
         <li data-ng-repeat="task in tasks | filter: {completed: true}">
           <div>{{task.content}}</div>
-          <div data-ng-click="complete(task)">Restart</div>
-          <div data-ng-click="remove(task)">Remove</div>
+          <a data-ng-click="complete(task)">Restart</a>
+          <a data-ng-click="remove(task)">Remove</a>
         </li>
       </ul>
     </div>
