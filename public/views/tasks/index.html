@@ -1,45 +1,56 @@
+<script type="text/ng-template" id="task_form.html">
+  <form data-ng-submit="submit(task)">
+    <div class="col-xs-6">
+      <input type="text" class="form-control" placeholder="What is needed to do?" data-ng-model="task.content" autofocus required>
+    </div>
+
+    <div class="col-xs-2">
+      <input type="text" class="form-control" placeholder="Due date" data-datepicker-popup="{{'shortDate'}}" data-ng-model="task.dueDate" data-min="minDate" data-max="'2015-06-22'" data-close-text="Close" />
+    </div>
+
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary" ng-model="task.priority" btn-radio="0">Default</button>
+      <button type="button" class="btn btn-primary" ng-model="task.priority" btn-radio="1">Urgent</button>
+      <button type="button" class="btn btn-primary" ng-model="task.priority" btn-radio="2">ASAP</button>
+    </div>
+
+    <button type="submit" class="btn btn-link">Save</button>
+  </form>
+</script>
+
 <h1>Your tasks</h1>
+
 <section data-ng-controller="TasksController" data-ng-init="find()">
-  <div class="container">
-    <form data-ng-submit="create()">
-      <div class="col-xs-6">
-        <input type="text" class="form-control" placeholder="What is needed to do?" data-ng-model="newTask.content" autofocus required>
-      </div>
-
-      <div class="col-xs-2">
-        <input type="text" class="form-control" placeholder="Due date" data-datepicker-popup="{{'shortDate'}}" data-ng-model="newTask.dueDate" data-min="minDate" data-max="'2015-06-22'" data-close-text="Close" />
-      </div>
-
-      <div class="btn-group">
-        <button type="button" class="btn btn-primary" ng-model="newTask.priority" btn-radio="0">Default</button>
-        <button type="button" class="btn btn-primary" ng-model="newTask.priority" btn-radio="1">Urgent</button>
-        <button type="button" class="btn btn-primary" ng-model="newTask.priority" btn-radio="2">ASAP</button>
-      </div>
-
-      <button type="submit" class="btn btn-link">Save</button>
-    </form>
-  </div>
+  <task-form task="newTask" on-submit="create(task)"></task-form>
 
   <div class="container">
     <table class="table">
       <thead>
       <tr>
-        <th><a href="" ng-click="predicate = 'priority'; reverse=!reverse">Priority</a></th>
         <th>Task</th>
         <th><a href="" ng-click="predicate = 'due_date'; reverse=!reverse">Due date</a></th>
+        <th><a href="" ng-click="predicate = 'priority'; reverse=!reverse">Priority</a></th>
         <th>#</th>
       </tr>
       </thead>
       <tbody>
       <tr data-ng-repeat="task in tasks | filter: {completed: false} | orderBy:predicate:reverse">
-        <td>{{task.priority}}</td>
-        <td>{{task.content}}</td>
-        <td>{{task.due_date | date: 'shortDate'}}</td>
-        <td>
-          <span data-ng-click="complete(task)">Complete</span>
-          <span data-ng-click="edit(task)">Edit</span>
-          <span data-ng-click="remove(task)">Remove</span>
-        </td>
+        <section data-ng-show="editingTask == task">
+          <td colspan="4" data-ng-show="editingTask == task">
+            <task-form task="task" on-submit="update(task)"></task-form>
+          </td>
+        </section>
+
+          <td data-ng-hide="editingTask == task">
+            {{task.content}}
+          </td>
+          <td data-ng-hide="editingTask == task">{{task.due_date | date: 'shortDate'}}</td>
+          <td data-ng-hide="editingTask == task">{{task.priority}}</td>
+          <td data-ng-hide="editingTask == task">
+            <span data-ng-click="complete(task)">Complete</span>
+            <span data-ng-click="edit(task)">Edit</span>
+            <span data-ng-click="remove(task)">Remove</span>
+          </td>
       </tr>
       </tbody>
 

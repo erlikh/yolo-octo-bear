@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean.tasks').controller('TasksController', ['$scope', '$routeParams', '$location', 'Global', 'Tasks', function ($scope, $routeParams, $location, Global, Tasks) {
+angular.module('mean.tasks').controller('TasksController', ['$scope', '$routeParams', '$location', '$modal', 'Global', 'Tasks', function ($scope, $routeParams, $location, $modal, Global, Tasks) {
     $scope.global = Global;
 
     $scope.predicate = 'priority';
@@ -16,20 +16,20 @@ angular.module('mean.tasks').controller('TasksController', ['$scope', '$routePar
 
     $scope.complete = function(task) {
         task.completed = !task.completed;
+        $scope.update(task);
     };
 
     $scope.edit = function(task) {
-        task.is_editing = true;
+        $scope.editingTask = task;
     };
 
-    $scope.create = function() {
-        var newTask = $scope.newTask,
+    $scope.create = function(task) {
 
         //TODO(NE): Simplify.
         task = new Tasks({
-            content: newTask.content,
-            priority: newTask.priority,
-            due_date: newTask.dueDate
+            content: task.content,
+            priority: task.priority,
+            due_date: task.dueDate
         });
         task.$save(function() {
             //TODO(NE): Check for errors.
@@ -43,10 +43,7 @@ angular.module('mean.tasks').controller('TasksController', ['$scope', '$routePar
     };
 
     $scope.update = function(task) {
-        if (!task.updated) {
-            task.updated = [];
-        }
-        task.updated.push(new Date().getTime());
+        task.updated = new Date().getTime();
 
         task.$update(function() {
             $location.path('tasks/' + task._id);
