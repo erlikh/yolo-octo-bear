@@ -23,6 +23,10 @@ angular.module('mean.tasks').controller('TasksController', ['$scope', '$routePar
         $scope.editingTask = task;
     };
 
+    $scope.cancelEdit = function() {
+        $scope.editingTask = false;
+    };
+
     $scope.create = function(task) {
 
         //TODO(NE): Simplify.

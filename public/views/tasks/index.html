@@ -1,27 +1,7 @@
-<script type="text/ng-template" id="task_form.html">
-  <form data-ng-submit="submit(task)">
-    <div class="col-xs-6">
-      <input type="text" class="form-control" placeholder="What is needed to do?" data-ng-model="task.content" autofocus required>
-    </div>
-
-    <div class="col-xs-2">
-      <input type="text" class="form-control" placeholder="Due date" data-datepicker-popup="{{'shortDate'}}" data-ng-model="task.dueDate" data-min="minDate" data-max="'2015-06-22'" data-close-text="Close" />
-    </div>
-
-    <div class="btn-group">
-      <button type="button" class="btn btn-primary" ng-model="task.priority" btn-radio="0">Default</button>
-      <button type="button" class="btn btn-primary" ng-model="task.priority" btn-radio="1">Urgent</button>
-      <button type="button" class="btn btn-primary" ng-model="task.priority" btn-radio="2">ASAP</button>
-    </div>
-
-    <button type="submit" class="btn btn-link">Save</button>
-  </form>
-</script>
-
 <h1>Your tasks</h1>
 
 <section data-ng-controller="TasksController" data-ng-init="find()">
-  <task-form task="newTask" on-submit="create(task)"></task-form>
+  <div task-form task="newTask" on-submit="create(task)" on-cancel="cancelEdit()"></div>
 
   <div class="container">
     <table class="table">
@@ -37,7 +17,7 @@
       <tr data-ng-repeat="task in tasks | filter: {completed: false} | orderBy:predicate:reverse">
         <section data-ng-show="editingTask == task">
           <td colspan="4" data-ng-show="editingTask == task">
-            <task-form task="task" on-submit="update(task)"></task-form>
+            <div task-form task="task" on-submit="update(task)" on-cancel="cancelEdit()"></div>
           </td>
         </section>
 
