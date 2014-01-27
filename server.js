@@ -79,4 +79,4 @@ console.log('Express app started on port ' + port);
 logger.init(app, passport, mongoose);
 
 // Expose app
-var exports = module.exports = app;
+exports = module.exports = app;

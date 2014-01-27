@@ -35,7 +35,8 @@ module.exports = function(grunt) {
             all: {
                 src: ['gruntfile.js', 'server.js', 'app/**/*.js', 'public/js/**', 'test/**/*.js'],
                 options: {
-                    jshintrc: true
+                    jshintrc: true,
+                    ignores: ['test/**']
                 }
             }
         },
@@ -72,11 +73,6 @@ module.exports = function(grunt) {
             test: {
                 NODE_ENV: 'test'
             }
-        },
-        karma: {
-            unit: {
-                configFile: 'test/karma/karma.conf.js'
-            }
         }
     });
 
@@ -84,7 +80,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-mocha-test');
-    grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-env');
@@ -96,6 +91,5 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['jshint', 'concurrent']);
 
     //Test task.
-    grunt.registerTask('testModels', ['env:test', 'mochaTest']);
-    grunt.registerTask('test', ['testModels', 'karma:unit']);
+    grunt.registerTask('test', ['env:test', 'mochaTest']);
 };
